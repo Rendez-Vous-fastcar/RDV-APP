@@ -6,5 +6,5 @@ window.firebaseConfig = {
   messagingSenderId: "29990031063",
   appId: "1:29990031063:web:aa2952f0533a182d4daa92",
   measurementId: "G-YPJ47QN9P7",
-  vapidKey: "INSERISCI_LA_TUA_VAPID_KEY"
+  vapidKey: "SXJqoSHFRzWYTEWhDzAKdmDdtO8VVKRNVkFArY7q77c"
 };
