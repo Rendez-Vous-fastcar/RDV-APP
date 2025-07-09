@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invio Notifiche</title>
+</head>
+<body>
+  <h2>Invia Notifica</h2>
+  <form id="form">
+    <input type="text" id="title" placeholder="Titolo" required><br>
+    <input type="text" id="body" placeholder="Messaggio" required><br>
+    <button type="submit">Invia</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const body = document.getElementById('body').value;
+
+      await fetch("/.netlify/functions/sendNotification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, body })
+      });
+      alert("Notifica inviata!");
+    });
+  </script>
+</body>
+</html>
