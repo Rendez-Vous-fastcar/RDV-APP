@@ -11,9 +11,9 @@ if ('serviceWorker' in navigator) {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
         const currentToken = await getToken(messaging, {
-          vapidKey,
-          serviceWorkerRegistration: registration
-        });
+  vapidKey,
+  serviceWorkerRegistration: registration
+});
 
         if (currentToken) {
           console.log("📩 Token FCM:", currentToken);
