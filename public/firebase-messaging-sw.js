@@ -9,4 +9,18 @@ firebase.initializeApp({
   appId: "1:29990031063:web:aa2952f0533a182d4daa92",
 });
 
+// Inizializza messaging
 const messaging = firebase.messaging();
+
+// Opzionale ma utile: gestisci i messaggi in background
+messaging.onBackgroundMessage(function(payload) {
+  console.log('[firebase-messaging-sw.js] Messaggio in background ricevuto:', payload);
+
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: '/icon.png'  // Sostituisci con la tua icona se vuoi
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
