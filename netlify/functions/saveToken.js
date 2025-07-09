@@ -26,3 +26,26 @@ exports.handler = async (event) => {
     };
   }
 };
+
+const fs = require('fs');
+const path = require('path');
+
+exports.handler = async function(event, context) {
+  const { token } = JSON.parse(event.body);
+  const filePath = path.join(__dirname, 'tokens.json');
+
+  let tokens = [];
+  if (fs.existsSync(filePath)) {
+    tokens = JSON.parse(fs.readFileSync(filePath));
+  }
+
+  if (!tokens.includes(token)) {
+    tokens.push(token);
+    fs.writeFileSync(filePath, JSON.stringify(tokens));
+  }
+
+  return {
+    statusCode: 200,
+    body: 'Token salvato!',
+  };
+};
