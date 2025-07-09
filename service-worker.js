@@ -19,54 +19,26 @@ self.addEventListener('fetch', event => {
     })
   );
 });
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
+importScripts('https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging-compat.js');
 
-app.use(bodyParser.json());
-
-const tokens = new Set(); // Salva i token in memoria (per esempio)
-
-app.post('/register-token', (req, res) => {
-  const { token } = req.body;
-  if (token) {
-    tokens.add(token);
-    console.log('Token registrato:', token);
-    res.sendStatus(200);
-  } else {
-    res.status(400).send('Token mancante');
-  }
+firebase.initializeApp({
+  apiKey: "TUO_API_KEY",
+  authDomain: "TUO_PROJECT_ID.firebaseapp.com",
+  projectId: "TUO_PROJECT_ID",
+  storageBucket: "TUO_PROJECT_ID.appspot.com",
+  messagingSenderId: "TUO_SENDER_ID",
+  appId: "TUO_APP_ID"
 });
 
-app.get('/tokens', (req, res) => {
-  res.json([...tokens]);
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage(payload => {
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: '/icon-192.png'
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server attivo su http://localhost:${PORT}`);
-});
-const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-service-account.json'); // scaricato da Firebase Console
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
-const tokens = [/* inserisci qui i token o recuperali dal DB */];
-
-const message = {
-  notification: {
-    title: 'Ciao!',
-    body: 'Questa è una notifica di prova'
-  },
-  tokens: tokens,
-};
-
-admin.messaging().sendMulticast(message)
-  .then(response => {
-    console.log(response.successCount + ' notifiche inviate con successo');
-  })
-  .catch(error => {
-    console.error('Errore invio notifiche:', error);
-  });
