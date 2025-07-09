@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Mia App PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png" sizes="192x192">
+  <meta name="theme-color" content="#0000ff" />
+</head>
+<body>
+  <h1>Benvenuto nella mia PWA!</h1>
+  <p>Funziona anche offline e supporta le notifiche.</p>
+  <button id="subscribe">Attiva notifiche</button>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrato'))
+        .catch(err => console.error('SW errore:', err));
+    }
+  </script>
+</body>
+</html>
