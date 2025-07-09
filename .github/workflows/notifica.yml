@@ -1,0 +1,23 @@
+name: Invia Notifica Push
+
+on:
+  workflow_dispatch:
+    inputs:
+      titolo:
+        description: "Titolo della notifica"
+        required: true
+        default: "Ciao!"
+      corpo:
+        description: "Messaggio della notifica"
+        required: true
+        default: "Questa è una notifica inviata da GitHub!"
+
+jobs:
+  invia:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invia notifica via Netlify Function
+        run: |
+          curl -X POST https://rendez-vous-app.netlify.app/functions/sendNotification \
+          -H "Content-Type: application/json" \
+          -d "{\"title\": \"${{ github.event.inputs.titolo }}\", \"body\": \"${{ github.event.inputs.corpo }}\"}"
