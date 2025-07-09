@@ -1,6 +1,6 @@
 import { messaging, getToken, onMessage } from './firebase-config';
 
-const vapidKey = "LA_TUA_CHIAVE_VAPID_WEB_PUSH";
+const vapidKey = "SXJqoSHFRzWYTEWhDzAKdmDdtO8VVKRNVkFArY7q77c";
 
 Notification.requestPermission().then(permission => {
   if (permission === "granted") {
