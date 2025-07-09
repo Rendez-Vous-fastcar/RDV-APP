@@ -18,6 +18,6 @@ jobs:
     steps:
       - name: Invia notifica via Netlify Function
         run: |
-          curl -X POST https://rendez-vous-app.netlify.app/functions/sendNotification \
+          curl -X POST https://rendez-vous-app.netlify.app.netlify/functions/sendNotification
           -H "Content-Type: application/json" \
           -d "{\"title\": \"${{ github.event.inputs.titolo }}\", \"body\": \"${{ github.event.inputs.corpo }}\"}"
