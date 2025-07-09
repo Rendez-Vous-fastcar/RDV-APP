@@ -3,7 +3,7 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBPLipRWjaEF593Png2nxqtyp8jerPWR-g",
-    authDomain: " rendez-vous-app-1c51d.firebaseapp.com",
+    authDomain: "rendez-vous-app-1c51d.firebaseapp.com",
     projectId: "rendez-vous-app-1c51d",
     storageBucket: "rendez-vous-app-1c51d.firebasestorage.app",
     messagingSenderId: "29990031063",
