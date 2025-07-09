@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La mia PWA</title>
+</head>
+<body>
+  <h1>Benvenuto nella mia PWA!</h1>
+  <p>Funziona anche offline e supporta le notifiche.</p>
+  <button onclick="attivaNotifiche()">Attiva notifiche</button>
+
+  <script type="module">
+    import './src/main.js';
+
+    window.attivaNotifiche = () => {
+      Notification.requestPermission().then(permission => {
+        if (permission !== "granted") {
+          alert("Permesso per notifiche negato.");
+        }
+      });
+    };
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/firebase-messaging-sw.js')
+        .then(reg => console.log('Service Worker registrato:', reg))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+  </script>
+</body>
+</html>
