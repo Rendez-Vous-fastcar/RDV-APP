@@ -1,11 +1,12 @@
 import { messaging, getToken, onMessage } from './firebase-config';
 
-const vapidKey = "BOmAfc-7AblrhBtAop_N6nK37BJZqakYaNoQWYnPbmikmbOFsMghlBp6aG6Mv2rjW9giSyyhn-hfm8JLxFvdAJc";
+const vapidKey = "BKkXRg-ofUpB5iUTYFSNEgrOHtp7KV7aJ9ihZ8a8HvCI2Yx0c0iqklv6E3N3oua0DslfwEvvX_qML9DSr07AXb4";
 
 Notification.requestPermission().then(permission => {
   if (permission === "granted") {
-    getToken(messaging, { vapidKey: "BOmAfc-7AblrhBtAop_N6nK37BJZqakYaNoQWYnPbmikmbOFsMghlBp6aG6Mv2rjW9giSyyhn-hfm8JLxFvdAJc", 
-                         serviceWorkerRegistration: registration })
+    getToken(messaging, { 
+      vapidKey: "BKkXRg-ofUpB5iUTYFSNEgrOHtp7KV7aJ9ihZ8a8HvCI2Yx0c0iqklv6E3N3oua0DslfwEvvX_qML9DSr07AXb4", 
+      serviceWorkerRegistration: registration })
       .then((currentToken) => {
         if (currentToken) {
           fetch('/.netlify/functions/saveToken', {
